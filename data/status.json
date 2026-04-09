@@ -225,10 +225,10 @@
       },
       {
         "name": "Sprint Demo",
-        "frequency": "Bi-weekly — Fridays 13:00",
+        "frequency": "Every Friday — 10:00-12:00 at EDS Office",
         "participants": "Dev team + EDS stakeholders",
-        "purpose": "Live demo of completed features, stakeholder feedback, sprint retrospective",
-        "nextDate": "2026-04-18"
+        "purpose": "Live demo of completed features at EDS office, stakeholder feedback, sprint retrospective",
+        "nextDate": "2026-04-11"
       },
       {
         "name": "Phase Gate Review",
