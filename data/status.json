@@ -1,0 +1,263 @@
+{
+  "lastUpdated": "2026-04-09",
+  "project": {
+    "name": "EDS Platform",
+    "tagline": "Unified logistics platform for Express Delivery Sweden",
+    "client": "Express Delivery Sweden (EDS)",
+    "partner": "Trice AB / InFiNet Code AB",
+    "description": "Replacing manual email-based quoting (30-60 min per quote across 6+ systems) with a unified digital platform powered by AI. At its core is EDS Search — an engine that instantly pulls rates, parses emails, auto-generates carrier quotes, and presents multi-option comparisons."
+  },
+  "timeline": {
+    "phases": [
+      {
+        "id": "phase-1",
+        "name": "Core Foundation + Email RFQ",
+        "weeks": "Weeks 1-6",
+        "dates": "March - mid April 2026",
+        "status": "active",
+        "percentComplete": 92,
+        "goal": "Replace email-based quoting with EDS Search + Email RFQ",
+        "highlights": [
+          "Go backend with 30+ REST API endpoints",
+          "React 19 frontend with full RFQ workflow",
+          "Claude AI email parsing (Swedish/English)",
+          "Front.com integration (webhook + polling)",
+          "Dual-mode auth (dev + Zitadel OIDC)",
+          "Multi-tenant RBAC (admin/agent/viewer)",
+          "11 database migrations, 8 vertical slices",
+          "Full CI/CD pipeline (GitHub Actions)",
+          "End-to-end verified with real Front.com account"
+        ],
+        "remaining": [
+          "EDS Search with Agreed Rates (carrier price lists + Sendify API)"
+        ]
+      },
+      {
+        "id": "phase-2",
+        "name": "Opter Integration + Route of the North",
+        "weeks": "Weeks 7-12",
+        "dates": "mid April - end May 2026",
+        "status": "upcoming",
+        "percentComplete": 0,
+        "goal": "Connect to Opter (90% of orders) + RoN market-ready by June 1",
+        "highlights": [
+          "Opter bi-directional sync (orders + rates)",
+          "RoN data model: linehauls, hubs, legs, contracts",
+          "Composite pricing engine with lead time calculation",
+          "RoN in EDS Search: dedicated vs co-load comparison",
+          "GPS integration + RoN dashboard",
+          "Dynamic Pricing Stage 1 (manual fill-rate view)"
+        ],
+        "remaining": []
+      },
+      {
+        "id": "phase-3",
+        "name": "RoN Test + Logistaas + Data",
+        "weeks": "June test, July-Aug build",
+        "dates": "June - August 2026",
+        "status": "upcoming",
+        "percentComplete": 0,
+        "goal": "Live RoN in June, build sea/air integration + analytics",
+        "highlights": [
+          "June: RoN test month with real customers",
+          "Logistaas integration (sea/air round-trip)",
+          "Logistaas to Fortnox accounting bridge",
+          "Customer Portal MVP",
+          "DBT on MySQL (stepping stone to Snowflake)"
+        ],
+        "remaining": []
+      },
+      {
+        "id": "phase-4",
+        "name": "Intelligence + Scale",
+        "weeks": "September onwards",
+        "dates": "September 2026+",
+        "status": "upcoming",
+        "percentComplete": 0,
+        "goal": "Full intelligence layer, dynamic pricing, portals",
+        "highlights": [
+          "Dynamic Pricing Stages 2-3",
+          "PIPS intelligence system (feedback scoring + dashboards)",
+          "Carrier Portal",
+          "HubSpot CRM integration",
+          "Advanced analytics + self-learning lead times"
+        ],
+        "remaining": []
+      }
+    ]
+  },
+  "progress": {
+    "summary": "Phase 1: 12 of 13 items complete (92%)",
+    "categories": [
+      {
+        "name": "Infrastructure",
+        "icon": "infra",
+        "items": [
+          { "text": "Repository with agentic infrastructure", "done": true },
+          { "text": "Go module (Go 1.24, chi, sqlx, uuid)", "done": true },
+          { "text": "Docker Compose local dev stack", "done": true },
+          { "text": "Multi-stage Dockerfile (distroless)", "done": true },
+          { "text": "OpenAPI 3.0 spec + Swagger UI", "done": true },
+          { "text": "GitHub Actions CI/CD pipeline", "done": true },
+          { "text": "React 19 + TypeScript + Tailwind CSS 4", "done": true }
+        ]
+      },
+      {
+        "name": "Backend Features",
+        "icon": "backend",
+        "items": [
+          { "text": "Auth — dual-mode: dev stub + Zitadel OIDC JWT", "done": true },
+          { "text": "RBAC — RequireRole middleware (admin, agent, viewer)", "done": true },
+          { "text": "Org member management (invite, roles, deactivate)", "done": true },
+          { "text": "Audit trail system", "done": true },
+          { "text": "Customer management (CRUD + search, 69 seeded)", "done": true },
+          { "text": "Carrier management (CRUD + search, 701 seeded)", "done": true },
+          { "text": "Booking request lifecycle (draft to delivered)", "done": true },
+          { "text": "Email RFQ — 5-step workflow", "done": true },
+          { "text": "Front.com integration (webhook + polling + drafts)", "done": true },
+          { "text": "Incomplete data resolver (needs_info + AI follow-up)", "done": true },
+          { "text": "Required fields validation", "done": true },
+          { "text": "RFQ time windows (4 datetime fields)", "done": true },
+          { "text": "Security hardening", "done": true },
+          { "text": "EDS Search — Agreed Rates", "done": false }
+        ]
+      },
+      {
+        "name": "Frontend Features",
+        "icon": "frontend",
+        "items": [
+          { "text": "Dual-mode auth (dev login / Zitadel OIDC PKCE)", "done": true },
+          { "text": "Login page with dev personas", "done": true },
+          { "text": "Dashboard — inbound emails + booking requests", "done": true },
+          { "text": "Inbound email detail with parsed data", "done": true },
+          { "text": "Incomplete data resolver UI", "done": true },
+          { "text": "Booking detail with RFQ actions", "done": true },
+          { "text": "Time window editor", "done": true },
+          { "text": "RFQ round management (4 steps)", "done": true },
+          { "text": "Carrier selection with search/filter/pagination", "done": true },
+          { "text": "Quote comparison with margin calculator", "done": true },
+          { "text": "EDS Search UI", "done": false }
+        ]
+      },
+      {
+        "name": "Database",
+        "icon": "database",
+        "items": [
+          { "text": "Migration 001-003: Core tables + seed data", "done": true },
+          { "text": "Migration 004: Org members", "done": true },
+          { "text": "Migration 005-006: RFQ rounds + messages", "done": true },
+          { "text": "Migration 007: Inbound supplements", "done": true },
+          { "text": "Migration 008: Time windows", "done": true },
+          { "text": "Migration 009-011: Users, roles, invitations", "done": true }
+        ]
+      }
+    ]
+  },
+  "deliverables": [
+    {
+      "date": "2026-04-09",
+      "title": "Platform Merge + CI/CD",
+      "description": "Full-stack monorepo: Go backend + React frontend + Terraform infra, unified CI/CD pipeline with GitHub Actions, end-to-end Zitadel OIDC verified",
+      "type": "milestone"
+    },
+    {
+      "date": "2026-04-07",
+      "title": "Data Quality + Time Windows",
+      "description": "Incomplete data resolver with AI follow-up emails, required fields validation, RFQ time windows for load/delivery scheduling",
+      "type": "feature"
+    },
+    {
+      "date": "2026-04-02",
+      "title": "Auth + Full Email RFQ + API Docs",
+      "description": "Complete dual-mode auth, RBAC, 5-step Email RFQ workflow, OpenAPI 3.0 spec, Swagger UI, React frontend with login, dashboard, RFQ management",
+      "type": "milestone"
+    },
+    {
+      "date": "2026-04-01",
+      "title": "Booking System + Real Data + Frontend",
+      "description": "Full booking lifecycle, 69 customers and 701 carriers seeded from Opter, React frontend with inbound detail, booking creation",
+      "type": "feature"
+    },
+    {
+      "date": "2026-03-29",
+      "title": "Repository + Inbound Email Parsing",
+      "description": "Go backend with Front.com webhook integration, Claude AI email parser, Docker Compose local dev, cross-repo knowledge bridge",
+      "type": "milestone"
+    }
+  ],
+  "process": {
+    "sprintCadence": "2-week sprints with demos",
+    "methodology": "AI-first compressed workflow — build working software fast, iterate on real code, use agents for backend logic and refactoring. 10 iterations in an hour, not 10 in a month.",
+    "layers": [
+      {
+        "name": "Strategic",
+        "icon": "compass",
+        "description": "Weekly syncs + phase gate reviews with EDS stakeholders. Architectural decisions documented as ADRs.",
+        "color": "#1a56db"
+      },
+      {
+        "name": "Delivery",
+        "icon": "rocket",
+        "description": "2-week sprints: plan, build, demo, retro. Working software over documentation.",
+        "color": "#7c3aed"
+      },
+      {
+        "name": "AI-First Development",
+        "icon": "cpu",
+        "description": "Claude Code for backend + domain analysis, rapid iteration on real code, automated testing and validation.",
+        "color": "#059669"
+      }
+    ],
+    "meetings": [
+      {
+        "name": "Architecture Sync",
+        "frequency": "Weekly — Mondays 10:00",
+        "participants": "Mattias + Nemanja",
+        "purpose": "Review technical decisions, unblock implementation, align on architecture",
+        "nextDate": "2026-04-14"
+      },
+      {
+        "name": "EDS Stakeholder Sync",
+        "frequency": "Weekly — Wednesdays 14:00",
+        "participants": "Mattias, Nemanja + EDS leadership",
+        "purpose": "Progress update, scope decisions, priority alignment, feedback",
+        "nextDate": "2026-04-16"
+      },
+      {
+        "name": "Sprint Demo",
+        "frequency": "Bi-weekly — Fridays 13:00",
+        "participants": "Dev team + EDS stakeholders",
+        "purpose": "Live demo of completed features, stakeholder feedback, sprint retrospective",
+        "nextDate": "2026-04-18"
+      },
+      {
+        "name": "Phase Gate Review",
+        "frequency": "End of each phase",
+        "participants": "Full team + EDS leadership + Fredrik Edeland",
+        "purpose": "Formal review of phase deliverables, go/no-go for next phase, budget and timeline check",
+        "nextDate": "2026-04-21"
+      }
+    ]
+  },
+  "team": [
+    { "name": "Mattias Bjornheden", "role": "Tech Lead + Project Delivery", "org": "Trice AB", "focus": "Architecture, decisions, oversight, AWS infra", "avatar": "MB" },
+    { "name": "Nemanja Milosavljevic", "role": "Lead Developer", "org": "InFiNet Code AB", "focus": "Day-to-day development, architecture implementation", "avatar": "NM" },
+    { "name": "Isabella", "role": "Infrastructure Engineer", "org": "Trice AB", "focus": "Monitoring, observability, Lambda-Promtail", "avatar": "IS" },
+    { "name": "Jonatan Petursson", "role": "TMS Integration Expert", "org": "Trice AB", "focus": "Opter/Logistaas integration (Phase 2-3)", "avatar": "JP" },
+    { "name": "Johan Kollberg", "role": "Logistics / RoN Expert", "org": "Trice AB", "focus": "Domain knowledge, pricing algorithms (Phase 2)", "avatar": "JK" },
+    { "name": "Oskar Strom", "role": "Data Engineer", "org": "Trice AB", "focus": "DBT, analytics (Phase 3)", "avatar": "OS" }
+  ],
+  "kpis": [
+    { "metric": "Quote Response Time", "current": "30-60 min", "target": "< 5 min", "icon": "clock" },
+    { "metric": "Co-loading Rate", "current": "9%", "target": "25%+", "icon": "truck" },
+    { "metric": "Rule of 40", "current": "32%", "target": "40%+", "icon": "chart" },
+    { "metric": "Portal Adoption", "current": "0%", "target": "50%", "icon": "users" },
+    { "metric": "API Bookings", "current": "0%", "target": "15%", "icon": "zap" }
+  ],
+  "decisions": [
+    { "id": "ADR-001", "title": "Knowledge repo separate from code", "date": "2026-03-29", "status": "Accepted" },
+    { "id": "ADR-002", "title": "Clean Architecture with vertical slices", "date": "2026-03-29", "status": "Accepted" },
+    { "id": "ADR-003", "title": "Claude Haiku 4.5 for email parsing", "date": "2026-03-29", "status": "Accepted" },
+    { "id": "ADR-004", "title": "Merge eds-platform into eds-project-lab", "date": "2026-04-09", "status": "Accepted" }
+  ]
+}
