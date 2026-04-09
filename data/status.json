@@ -4,7 +4,7 @@
     "name": "EDS Platform",
     "tagline": "Unified logistics platform for Express Delivery Sweden",
     "client": "Express Delivery Sweden (EDS)",
-    "partner": "Trice AB / InFiNet Code AB",
+    "partner": "Trice AB / Aidoni Group AB",
     "description": "Replacing manual email-based quoting (30-60 min per quote across 6+ systems) with a unified digital platform powered by AI. At its core is EDS Search — an engine that instantly pulls rates, parses emails, auto-generates carrier quotes, and presents multi-option comparisons."
   },
   "timeline": {
@@ -214,21 +214,21 @@
         "frequency": "Weekly — Mondays 10:00",
         "participants": "Mattias + Nemanja",
         "purpose": "Review technical decisions, unblock implementation, align on architecture",
-        "nextDate": "2026-04-14"
+        "nextDate": "2026-04-13"
       },
       {
         "name": "EDS Stakeholder Sync",
         "frequency": "Weekly — Wednesdays 14:00",
         "participants": "Mattias, Nemanja + EDS leadership",
         "purpose": "Progress update, scope decisions, priority alignment, feedback",
-        "nextDate": "2026-04-16"
+        "nextDate": "2026-04-15"
       },
       {
         "name": "Sprint Demo",
         "frequency": "Every Friday — 10:00-12:00 at EDS Office",
         "participants": "Dev team + EDS stakeholders",
         "purpose": "Live demo of completed features at EDS office, stakeholder feedback, sprint retrospective",
-        "nextDate": "2026-04-11"
+        "nextDate": "2026-04-10"
       },
       {
         "name": "Phase Gate Review",
@@ -241,7 +241,7 @@
   },
   "team": [
     { "name": "Mattias Bjornheden", "role": "Tech Lead + Project Delivery", "org": "Trice AB", "focus": "Architecture, decisions, oversight, AWS infra", "avatar": "MB" },
-    { "name": "Nemanja Milosavljevic", "role": "Lead Developer", "org": "InFiNet Code AB", "focus": "Day-to-day development, architecture implementation", "avatar": "NM" },
+    { "name": "Nemanja Milosavljevic", "role": "Lead Developer", "org": "Aidoni Group AB", "focus": "Day-to-day development, architecture implementation", "avatar": "NM" },
     { "name": "Isabella", "role": "Infrastructure Engineer", "org": "Trice AB", "focus": "Monitoring, observability, Lambda-Promtail", "avatar": "IS" },
     { "name": "Jonatan Petursson", "role": "TMS Integration Expert", "org": "Trice AB", "focus": "Opter/Logistaas integration (Phase 2-3)", "avatar": "JP" },
     { "name": "Johan Kollberg", "role": "Logistics / RoN Expert", "org": "Trice AB", "focus": "Domain knowledge, pricing algorithms (Phase 2)", "avatar": "JK" },
