@@ -1,13 +1,19 @@
 // EDS Platform Status Dashboard
-// Fetches data/status.json and renders all sections with tab navigation
+// Loads data from window.STATUS_DATA (inlined by deploy_pages.py for the
+// encrypted Pages build) or falls back to fetch('data/status.json') for
+// local dev (`python -m http.server` from docs/).
 
 document.addEventListener('DOMContentLoaded', () => {
   // Tab navigation
   initTabs();
 
-  // Load data
-  fetch('data/status.json')
-    .then(res => res.json())
+  // Load data — inlined global wins over fetch so the encrypted Pages
+  // build never has to ship a plain-text status.json.
+  const dataPromise = window.STATUS_DATA
+    ? Promise.resolve(window.STATUS_DATA)
+    : fetch('data/status.json').then(res => res.json());
+
+  dataPromise
     .then(data => {
       renderHero(data);
       renderTimeline(data.timeline);
