@@ -4,7 +4,7 @@
     "name": "EDS Platform",
     "tagline": "Unified logistics platform for Express Delivery Sweden",
     "client": "Express Delivery Sweden (EDS)",
-    "partner": "Trice AB / Aidoni Group AB",
+    "partner": "Trice AB",
     "description": "Replacing manual email-based quoting (30-60 min per quote across 6+ systems) with a unified digital platform powered by AI. At its core is EDS Search — an engine that instantly pulls rates, parses emails, auto-generates carrier quotes, and presents multi-option comparisons."
   },
   "timeline": {
