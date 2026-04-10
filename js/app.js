@@ -19,7 +19,6 @@ document.addEventListener('DOMContentLoaded', () => {
       renderKPIs(data.kpis);
       renderDecisions(data.decisions);
       if (data.plan) renderPlan(data.plan);
-      if (data.hours) renderHours(data.hours);
       if (data.dataInsights) renderInsights(data.dataInsights);
       if (data.architecture) renderArchitecture(data.architecture);
       if (data.integrations) renderIntegrations(data.integrations);
@@ -413,54 +412,6 @@ function renderPlanRows() {
 
 function categorySlug(s) {
   return (s || '').toLowerCase().replace(/[^a-z0-9]+/g, '-');
-}
-
-// ===== Hours =====
-function renderHours(hours) {
-  const container = document.getElementById('hours-container');
-  container.innerHTML = hours.roles.map(role => {
-    const pctUsed = role.allocated > 0 ? Math.round((role.used / role.allocated) * 100) : 0;
-    const sparkMax = Math.max(1, ...role.perSprint, role.allocated / 4);
-    const w = 280, h = 80, gap = 4, n = role.perSprint.length;
-    const barW = (w - gap * (n - 1)) / n;
-    const phaseSplitX = (4 * (barW + gap)) - gap / 2;
-    const bars = role.perSprint.map((v, i) => {
-      const bh = sparkMax > 0 ? (v / sparkMax) * (h - 18) : 0;
-      const x = i * (barW + gap);
-      const y = h - bh - 14;
-      const filled = v > 0;
-      return `
-        <g>
-          <rect x="${x}" y="${y}" width="${barW}" height="${bh}" rx="2" class="${filled ? 'spark-bar spark-bar--filled' : 'spark-bar'}"/>
-          <text x="${x + barW/2}" y="${h - 2}" class="spark-label">S${i+1}</text>
-          ${filled ? `<text x="${x + barW/2}" y="${y - 2}" class="spark-value">${v}</text>` : ''}
-        </g>`;
-    }).join('');
-
-    return `
-      <div class="hours-card">
-        <div class="hours-card-header">
-          <div class="hours-role">${esc(role.name)}</div>
-          <div class="hours-pct">${pctUsed}% used</div>
-        </div>
-        <div class="hours-stats">
-          <div class="hours-stat"><span class="hours-stat-label">Allocated</span><span class="hours-stat-value">${role.allocated} h</span></div>
-          <div class="hours-stat"><span class="hours-stat-label">Used</span><span class="hours-stat-value">${role.used} h</span></div>
-          <div class="hours-stat"><span class="hours-stat-label">Remaining</span><span class="hours-stat-value">${role.remaining} h</span></div>
-        </div>
-        <div class="hours-bar">
-          <div class="hours-bar-fill" style="width:${Math.min(100, pctUsed)}%"></div>
-        </div>
-        <svg class="hours-spark" viewBox="0 0 ${w} ${h}" preserveAspectRatio="xMidYMid meet">
-          <line x1="${phaseSplitX}" y1="0" x2="${phaseSplitX}" y2="${h - 14}" class="spark-divider"/>
-          ${bars}
-        </svg>
-        <div class="hours-spark-legend">
-          <span>Phase 1 (S1–S4)</span>
-          <span>Phase 2 (S5–S8)</span>
-        </div>
-      </div>`;
-  }).join('');
 }
 
 // ===== Insights =====
