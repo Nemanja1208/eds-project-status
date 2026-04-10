@@ -53,6 +53,22 @@
         <svg class="tab-icon" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
         KPIs
       </button>
+      <button class="tab" data-tab="plan">
+        <svg class="tab-icon" viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"/></svg>
+        Plan
+      </button>
+      <button class="tab" data-tab="hours">
+        <svg class="tab-icon" viewBox="0 0 24 24"><path d="M3 3v18h18M7 14l4-4 4 4 5-5"/></svg>
+        Hours
+      </button>
+      <button class="tab" data-tab="insights">
+        <svg class="tab-icon" viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+        Insights
+      </button>
+      <button class="tab" data-tab="knowledge">
+        <svg class="tab-icon" viewBox="0 0 24 24"><path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/></svg>
+        Knowledge
+      </button>
     </div>
   </nav>
 
@@ -121,9 +137,117 @@
         <p class="panel-desc">Target metrics — 12-month horizon</p>
       </div>
       <div class="kpi-grid" id="kpi-container"></div>
-      <div class="decisions-section">
-        <h3>Architecture Decisions</h3>
+    </section>
+
+    <!-- Plan (from Mattias's tracker xlsx + reality overrides) -->
+    <section class="panel" id="panel-plan">
+      <div class="panel-header">
+        <h2>Plan</h2>
+        <p class="panel-desc">Sprint-by-sprint work items from the EDS contractual tracker. Status = reality (override of Mattias's sheet — hover the badge to see the tracked status).</p>
+      </div>
+      <div class="plan-toolbar" id="plan-toolbar"></div>
+      <div class="plan-table-wrap">
+        <table class="plan-table" id="plan-table">
+          <thead>
+            <tr>
+              <th class="plan-col-id">ID</th>
+              <th class="plan-col-sprint">Sprint</th>
+              <th class="plan-col-cat">Category</th>
+              <th class="plan-col-item">Work Item</th>
+              <th class="plan-col-status">Status</th>
+              <th class="plan-col-comments">Comments / Risks</th>
+            </tr>
+          </thead>
+          <tbody id="plan-tbody"></tbody>
+        </table>
+      </div>
+      <div class="plan-empty" id="plan-empty" hidden>No work items match your filters.</div>
+    </section>
+
+    <!-- Hours burndown -->
+    <section class="panel" id="panel-hours">
+      <div class="panel-header">
+        <h2>Hours Burndown</h2>
+        <p class="panel-desc">Allocated vs. used hours per role across the 8 sprints. Source: Hours Tracker sheet.</p>
+      </div>
+      <div class="hours-grid" id="hours-container"></div>
+    </section>
+
+    <!-- Insights from real Opter data -->
+    <section class="panel" id="panel-insights">
+      <div class="panel-header">
+        <h2>Real-Data Insights</h2>
+        <p class="panel-desc" id="insights-summary"></p>
+      </div>
+      <div class="insights-metrics" id="insights-metrics"></div>
+      <div class="insights-twocol">
+        <div class="insights-block">
+          <h3>Mode split</h3>
+          <div id="insights-mode"></div>
+        </div>
+        <div class="insights-block">
+          <h3>Direction split (road)</h3>
+          <div id="insights-direction"></div>
+        </div>
+      </div>
+      <div class="insights-twocol">
+        <div class="insights-block">
+          <h3>Customer concentration</h3>
+          <div id="insights-customers"></div>
+        </div>
+        <div class="insights-block">
+          <h3>Carrier contact quality (703 carriers)</h3>
+          <div id="insights-carriers"></div>
+        </div>
+      </div>
+      <div class="insights-block">
+        <h3>RoN corridor traffic</h3>
+        <div id="insights-ron"></div>
+      </div>
+      <p class="insights-source">Source: <code id="insights-source-path"></code></p>
+    </section>
+
+    <!-- Knowledge index -->
+    <section class="panel" id="panel-knowledge">
+      <div class="panel-header">
+        <h2>Knowledge Base</h2>
+        <p class="panel-desc">Architecture, decisions, glossary and integration status. Knowledge files live in the MindFlowMap repo.</p>
+      </div>
+
+      <div class="knowledge-section">
+        <h3>Architecture</h3>
+        <p class="knowledge-summary" id="arch-summary"></p>
+        <div class="arch-twocol">
+          <div class="arch-block">
+            <h4>Principles</h4>
+            <ul class="arch-principles" id="arch-principles"></ul>
+          </div>
+          <div class="arch-block">
+            <h4>Data model</h4>
+            <p class="arch-meta" id="arch-data-meta"></p>
+            <ul class="arch-tables" id="arch-tables"></ul>
+          </div>
+        </div>
+        <div class="arch-links" id="arch-links"></div>
+      </div>
+
+      <div class="knowledge-section">
+        <h3>Architecture Decision Records</h3>
         <div class="decisions-grid" id="decisions-container"></div>
+      </div>
+
+      <div class="knowledge-section">
+        <h3>Integrations</h3>
+        <div class="integrations-grid" id="integrations-container"></div>
+      </div>
+
+      <div class="knowledge-section">
+        <h3>Glossary</h3>
+        <p class="knowledge-summary"><span id="glossary-count"></span> terms across logistics, EDS-specific, and systems.</p>
+        <div class="glossary-toolbar">
+          <input type="text" id="glossary-search" class="glossary-search" placeholder="Search glossary...">
+        </div>
+        <div class="glossary-groups" id="glossary-container"></div>
       </div>
     </section>
 
