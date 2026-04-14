@@ -499,12 +499,6 @@ function renderArchitecture(arch) {
       <li><code>${esc(t.name)}</code> <span class="arch-table-purpose">${esc(t.purpose)}</span></li>`).join('');
   }
 
-  const links = document.getElementById('arch-links');
-  links.innerHTML = (arch.links || []).map(l => `
-    <a class="arch-link" href="${esc(l.path)}" target="_blank" rel="noopener">
-      <span class="arch-link-label">${esc(l.label)}</span>
-      <code class="arch-link-path">${esc(l.path)}</code>
-    </a>`).join('');
 }
 
 // ===== Integrations =====
