@@ -295,6 +295,41 @@ body {
 }
 .badge--amber .badge-dot { animation: pulse 2s infinite; }
 
+/* Nice-to-have ribbon — marks items beyond the contractual tracker scope */
+.ribbon-nth {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 8px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  background: linear-gradient(135deg, var(--color-accent-light), var(--color-primary-light));
+  color: var(--color-accent);
+  border: 1px solid var(--color-accent-light);
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.ribbon-nth::before {
+  content: "★";
+  font-size: 11px;
+  line-height: 1;
+}
+
+/* Inline legend above Progress + Roadmap panels */
+.ribbon-legend {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 12px 0 20px;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+.ribbon-legend .ribbon-nth { margin-left: 0; }
+
 /* Progress bars */
 .progress-track {
   height: 8px;

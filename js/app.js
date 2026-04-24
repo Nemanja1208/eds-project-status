@@ -99,7 +99,11 @@ function renderHero(data) {
 // ===== Timeline =====
 function renderTimeline(timeline) {
   const container = document.getElementById('timeline-container');
-  container.innerHTML = timeline.phases.map(phase => {
+  const hasAnyNth = timeline.phases.some(p =>
+    (p.highlights || []).some(h => typeof h === 'object' && h && h.niceToHave)
+  );
+  const legend = hasAnyNth ? ribbonLegend() : '';
+  container.innerHTML = legend + timeline.phases.map(phase => {
     const statusClass = phase.status === 'active' ? 'timeline-item--active' :
                         phase.status === 'complete' ? 'timeline-item--complete' : '';
     const statusBadge = phase.status === 'active'
@@ -109,7 +113,12 @@ function renderTimeline(timeline) {
       : '<span class="badge badge--gray">Upcoming</span>';
 
     const highlights = phase.highlights.length > 0
-      ? '<ul class="timeline-highlights">' + phase.highlights.map(h => `<li>${esc(h)}</li>`).join('') + '</ul>'
+      ? '<ul class="timeline-highlights">' + phase.highlights.map(h => {
+          const isObj = typeof h === 'object' && h !== null;
+          const text = isObj ? h.text : h;
+          const ribbon = (isObj && h.niceToHave) ? ribbonNth() : '';
+          return `<li>${esc(text)}${ribbon}</li>`;
+        }).join('') + '</ul>'
       : '';
 
     const remaining = phase.remaining.length > 0
@@ -149,6 +158,10 @@ function renderProgress(progress) {
   const doneItems = progress.categories.reduce((sum, c) => sum + c.items.filter(i => i.done).length, 0);
   const overallPct = Math.round((doneItems / totalItems) * 100);
 
+  const hasAnyNth = progress.categories.some(c =>
+    c.items.some(i => i.niceToHave)
+  );
+
   document.getElementById('overall-progress').innerHTML = `
     <div style="display:flex;justify-content:space-between;align-items:baseline;">
       <span class="overall-label">Overall Phase 1 Progress</span>
@@ -157,10 +170,11 @@ function renderProgress(progress) {
     <div class="overall-track">
       <div class="overall-fill" style="width:${overallPct}%"></div>
     </div>
-    <div class="progress-pct">${doneItems} of ${totalItems} items complete</div>`;
+    <div class="progress-pct">${doneItems} of ${totalItems} items complete</div>
+    ${hasAnyNth ? ribbonLegend() : ''}`;
 
   // Category cards
-  const iconMap = { infra: '🏗️', backend: '⚙️', frontend: '🎨', database: '🗄️' };
+  const iconMap = { infra: '🏗️', backend: '⚙️', frontend: '🎨', database: '🗄️', sparkles: '✨' };
   const container = document.getElementById('progress-container');
   container.innerHTML = progress.categories.map(cat => {
     const done = cat.items.filter(i => i.done).length;
@@ -170,7 +184,8 @@ function renderProgress(progress) {
 
     const items = cat.items.map(item => {
       const cls = item.done ? 'checklist-item--done' : 'checklist-item--pending';
-      return `<li class="checklist-item ${cls}">${esc(item.text)}</li>`;
+      const ribbon = item.niceToHave ? ribbonNth() : '';
+      return `<li class="checklist-item ${cls}">${esc(item.text)}${ribbon}</li>`;
     }).join('');
 
     return `
@@ -572,4 +587,17 @@ function esc(str) {
   const div = document.createElement('div');
   div.textContent = String(str);
   return div.innerHTML;
+}
+
+// Small pill marking items that are beyond the contractual EDS tracker scope
+// — polish, safeguards, AI learning, dev ergonomics. Applied inside
+// renderTimeline (roadmap highlights) and renderProgress (checklist items).
+function ribbonNth() {
+  return '<span class="ribbon-nth">nice-to-have</span>';
+}
+function ribbonLegend() {
+  return '<div class="ribbon-legend">' +
+    ribbonNth() +
+    '<span>marks work beyond the contractual tracker scope — safeguards, AI polish, UX, and dev ergonomics we added on top.</span>' +
+    '</div>';
 }
